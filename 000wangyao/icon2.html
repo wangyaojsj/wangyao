@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例2-底部Tab导航</title>
+    <script src="https://at.alicdn.com/t/c/font_5231396_qx5l7npzhym.js"></script>
+    <style>
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* 底部导航容器 flex布局平分宽度 */
+        .tab-nav {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            /* height: 55px; */
+            background: #fff;
+            border-top: 1px solid #eee;
+        }
+
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #666;
+        }
+        .tab-item svg {
+            font-size: 24px;
+            margin: 5px;
+        }
+        /* 激活样式：选中之后变色 */
+        .tab-item.active {
+            color: #ff7d00;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 style="padding:20px">案例2：移动端底部导航栏</h3>
+
+    <!-- 底部导航 -->
+    <div class="tab-nav">
+        <div class="tab-item active" onclick="changeTab(this)">
+            <svg class="icon icon-home" aria-hidden="true">
+                <use xlink:href="#icon-a-shouyechangguishouye-copy"></use>
+            </svg>
+            <span>首页</span>
+        </div>
+       
+        <div class="tab-item" onclick="changeTab(this)">
+            <svg class="icon icon-cart" aria-hidden="true">
+                <use xlink:href="#icon-gouwuche"></use>
+            </svg>
+            <span>购物车</span>
+        </div>
+         <div class="tab-item" onclick="changeTab(this)">
+            <svg  class="icon icon-dizhi" aria-hidden="true">
+                <use xlink:href="#icon-dizhi"></use>
+            </svg>
+            <span>地址</span>
+        </div>
+        <div class="tab-item" onclick="changeTab(this)">
+            <svg class="icon icon-user" aria-hidden="true">
+                <use xlink:href="#icon-wode"></use>
+            </svg>
+            <span>我的</span>
+        </div>
+    </div>
+    <!-- 极简JS：只做切换class，难度极低，适合初学 -->
+    <script>
+        // 获取全部tab标签
+        function changeTab(current) {
+            // 1.先把所有导航取消active
+            let tabs = document.querySelectorAll(".tab-item");
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+            // 2.给当前点击的加上active高亮
+            current.classList.add("active");
+        }
+    </script>
+</body>
+
+</html>

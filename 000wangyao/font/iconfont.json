@@ -1,0 +1,107 @@
+{
+  "id": "5231396",
+  "name": "svg",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "48076890",
+      "name": "地址",
+      "font_class": "dizhi",
+      "unicode": "e6d7",
+      "unicode_decimal": 59095
+    },
+    {
+      "icon_id": "47596034",
+      "name": "CRMEB-216-收藏夹-线性",
+      "font_class": "CRMEB-216-shoucangjia-xianxing",
+      "unicode": "e988",
+      "unicode_decimal": 59784
+    },
+    {
+      "icon_id": "10487550",
+      "name": "计划",
+      "font_class": "jihua",
+      "unicode": "e696",
+      "unicode_decimal": 59030
+    },
+    {
+      "icon_id": "48473438",
+      "name": "计划-copy",
+      "font_class": "jihua-copy",
+      "unicode": "e8b6",
+      "unicode_decimal": 59574
+    },
+    {
+      "icon_id": "48472849",
+      "name": "484743998",
+      "font_class": "a-484743998",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "48472857",
+      "name": "484743998-copy",
+      "font_class": "a-484743998-copy",
+      "unicode": "e8b5",
+      "unicode_decimal": 59573
+    },
+    {
+      "icon_id": "48472791",
+      "name": "购物车-copy",
+      "font_class": "gouwuche-copy",
+      "unicode": "e8b0",
+      "unicode_decimal": 59568
+    },
+    {
+      "icon_id": "48472795",
+      "name": "发现-copy",
+      "font_class": "faxian-copy",
+      "unicode": "e8b1",
+      "unicode_decimal": 59569
+    },
+    {
+      "icon_id": "48472807",
+      "name": "我的-copy",
+      "font_class": "wode-copy",
+      "unicode": "e8b2",
+      "unicode_decimal": 59570
+    },
+    {
+      "icon_id": "48472808",
+      "name": "首页  常规首页-copy",
+      "font_class": "a-shouyechangguishouye-copy",
+      "unicode": "e8b3",
+      "unicode_decimal": 59571
+    },
+    {
+      "icon_id": "48472819",
+      "name": "首页  常规首页-copy-copy",
+      "font_class": "a-shouyechangguishouye-copy-copy",
+      "unicode": "e8b4",
+      "unicode_decimal": 59572
+    },
+    {
+      "icon_id": "6003699",
+      "name": "购物车",
+      "font_class": "gouwuche",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "11372661",
+      "name": "发现",
+      "font_class": "faxian",
+      "unicode": "e8af",
+      "unicode_decimal": 59567
+    },
+    {
+      "icon_id": "19949534",
+      "name": "我的",
+      "font_class": "wode",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    }
+  ]
+}

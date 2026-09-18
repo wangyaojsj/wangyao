@@ -1,0 +1,71 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 5231396 */
+  src: url('iconfont.woff2?t=1788845510515') format('woff2'),
+       url('iconfont.woff?t=1788845510515') format('woff'),
+       url('iconfont.ttf?t=1788845510515') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-dizhi:before {
+  content: "\e6d7";
+}
+
+.icon-CRMEB-216-shoucangjia-xianxing:before {
+  content: "\e988";
+}
+
+.icon-jihua:before {
+  content: "\e696";
+}
+
+.icon-jihua-copy:before {
+  content: "\e8b6";
+}
+
+.icon-a-484743998:before {
+  content: "\e607";
+}
+
+.icon-a-484743998-copy:before {
+  content: "\e8b5";
+}
+
+.icon-gouwuche-copy:before {
+  content: "\e8b0";
+}
+
+.icon-faxian-copy:before {
+  content: "\e8b1";
+}
+
+.icon-wode-copy:before {
+  content: "\e8b2";
+}
+
+.icon-a-shouyechangguishouye-copy:before {
+  content: "\e8b3";
+}
+
+.icon-a-shouyechangguishouye-copy-copy:before {
+  content: "\e8b4";
+}
+
+.icon-gouwuche:before {
+  content: "\e621";
+}
+
+.icon-faxian:before {
+  content: "\e8af";
+}
+
+.icon-wode:before {
+  content: "\e60b";
+}
+

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例2-底部Tab导航（增加消息红点）</title>
+    <script src="./font/iconfont.js"></script>
+    <style>
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* 底部导航容器 flex布局平分宽度 */
+        .tab-nav {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #eee;
+            border-top: 1px solid #eee;
+        }
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #666;
+            position: relative; /* 红点绝对定位父容器，重点！ */
+            padding: 8px 0;
+        }
+        .tab-item svg {
+            font-size: 24px;
+            margin: 5px;
+        }
+        /* 激活样式：选中之后变色 */
+        .tab-item.active {
+            color: #ff7d00;
+        }
+
+        /* ========== 三种红点样式（CSS实现） ========== */
+        /* 样式1：小圆点红点，无数字 */
+        .badge-dot {
+            position: absolute;
+            top: 4px;
+            right: 22px;
+            width: 8px;
+            height: 8px;
+            background-color: #f53f3f;
+            border-radius: 50%;
+        }
+
+        /* 样式2：数字角标红点 */
+        .badge-num {
+            position: absolute;
+            top: 2px;
+            right: 14px;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 4px;
+            background-color: #f53f3f;
+            border-radius: 9px;
+            color: #fff;
+            font-size: 12px;
+            text-align: center;
+            line-height: 18px;
+        }
+        /* 数字超过99显示99+ */
+        .badge-num.max {
+            font-size: 10px;
+        }
+
+        /* 样式3：带白色描边红点 */
+        .badge-border {
+            position: absolute;
+            top: 4px;
+            right: 22px;
+            width: 8px;
+            height: 8px;
+            background-color: #f53f3f;
+            border: 2px solid yellow;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h3 style="padding:20px">案例2：移动端底部导航栏（三种消息红点）</h3>
+    <!-- 底部导航 -->
+    <div class="tab-nav">
+        <div class="tab-item active" onclick="changeTab(this)">
+            <svg class="icon icon-home" aria-hidden="true">
+                <use xlink:href="#icon-a-shouyechangguishouye-copy"></use>
+            </svg>
+            <span>首页</span>
+            <!-- 样式1：无数字小圆点 -->
+            <span class="badge-dot"></span>
+        </div>
+        
+        <div class="tab-item" onclick="changeTab(this)">
+            <svg class="icon icon-cart" aria-hidden="true">
+                <use xlink:href="#icon-gouwuche"></use>
+            </svg>
+            <span>购物车</span>
+            <!-- 样式2：数字角标 -->
+            <span class="badge-num">5</span>
+        </div>
+        <div class="tab-item" onclick="changeTab(this)">
+            <svg  class="icon icon-dizhi" aria-hidden="true">
+                <use xlink:href="#icon-dizhi"></use>
+            </svg>
+            <span>地址</span>
+            <!-- 样式3：带白色描边红点 -->
+            <span class="badge-border"></span>
+        </div>
+        <div class="tab-item" onclick="changeTab(this)">
+            <svg class="icon icon-user" aria-hidden="true">
+                <use xlink:href="#icon-wode"></use>
+            </svg>
+            <span>我的</span>
+            <!-- 数字超过99演示 -->
+            <span class="badge-num max">99+</span>
+        </div>
+    </div>
+
+    <script>
+        // Tab切换
+        function changeTab(current) {
+            let tabs = document.querySelectorAll(".tab-item");
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+            current.classList.add("active");
+        }
+
+        // 简单JS示例：控制红点显示隐藏（可选演示）
+        function hideBadge(el) {
+            el.style.display = "none";
+        }
+        function showBadge(el) {
+            el.style.display = "inline-block";
+        }
+    </script>
+</body>
+</html>
