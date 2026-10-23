@@ -43,8 +43,10 @@ description: 提交项目：将当前项目改动 git commit 并 push 到 Gitee 
    ```powershell
    $env:GIT_TERMINAL_PROMPT='0'; $env:GIT_ASKPASS='echo'
    $wy_token = (Get-Content .gitee-token -Raw).Trim()
-   git -c credential.helper= push -u "https://oauth2:$wy_token@gitee.com/neusoft_wangyao_jsj/wy026005.git" master
+   git -c credential.helper= push "https://oauth2:$wy_token@gitee.com/neusoft_wangyao_jsj/wy026005.git" master
    ```
+
+   注意：**不要加 `-u` 参数**——它会把带令牌的 URL 写入 `.git/config` 的分支追踪配置，导致令牌落盘。若已误用，用 `git branch --unset-upstream master` 清除。
 
 5. **验证**：
 
