@@ -26,3 +26,8 @@
   > 创建skill:提交项目：使用git commit并push到gitee仓库，
   > gitee私人令牌 4d8912d1ec97688b7944c617c6850bd0;
   > 仓库地址:`https://gitee.com/neusoft_wangyao_jsj/wangyao2026.git`。
+
+## 2026-10-23（第6条）
+- 使用的模型：GLM-5.3-Flash
+- 提示词内容：
+  > 创建skill:提交项目：使用git commit并push当前项目到`https://gitee.com/neusoft_wangyao_jsj/wy026005.git`
