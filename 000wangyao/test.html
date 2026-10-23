@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抓小球游戏|函数的运用</title>
+</head>
+<style>
+    body{
+        background: #f0f8ff;
+        overflow: hidden;
+        font-size: 24px;
+    }
+    #info{
+        padding: 16px;
+        background: #222;
+        color: #fff;
+    }
+    .ball{
+        width: 50px;
+        height: 50px;
+        background: red;
+        border-radius: 50%;
+        position: absolute;
+        cursor: pointer;
+    }
+</style>
+<body>
+    <div id="info">当前分数：<span id="score">0</span></div>
+    <div class="ball" id="ball"></div>
+<script>
+    const game = {
+        score: 0,
+        ballDom: document.getElementById("ball"),
+        width: 50,
+        height: 50
+    };
+function moveBall(){ 
+    const maxX = window.innerWidth - game.width;
+    const maxY = window.innerHeight - game.height;
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+    game.ballDom.style.left = randomX + "px";
+    game.ballDom.style.top = randomY + "px";
+}
+function updateScore(){
+    document.getElementById("score").innerText = game.score;
+}
+game.ballDom.addEventListener("click", function(e){
+    game.score += 10;
+    updateScore();
+    moveBall();
+   
+});
+document.body.addEventListener("click", function(e){
+    if(e.target !== game.ballDom){
+        game.score -= 5;
+        updateScore();
+    }
+});
+window.addEventListener("resize", ()=>{
+    moveBall();
+});
+    </script>
+</body>
+</html>

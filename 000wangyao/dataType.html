@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 数据类型与运算符</title>
+    <style>
+        /* flex外层容器 */
+        .container{
+            display: flex;
+            flex-wrap: wrap; /* 空间不足自动换行 */
+            gap:10px; /* 方块之间间距，替代margin */
+            padding:10px;
+        }
+        .container > div{
+            width: 180px;
+            height: 180px;
+            background-color: red;
+            color: white;
+            text-align: center;
+            line-height: 180px;
+            font-size: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- JS动态创建div放入这里 -->
+    </div>
+    <script>
+    var a = 6, b = 1;
+    console.log(a+b);
+    console.log(a++,++b);
+    console.log(a-b>0?a:b);
+    console.log(true&&false,true||false,!true);
+    var str="hello world",num=123,bl=true,obj={name:"张三",age:18},ud,
+    kong=null;
+    console.log(typeof str,typeof num,
+     typeof bl,typeof obj,typeof ud,typeof kong);
+     console.log(0.1+0.2==0.3);
+    // JS不能用==或者===来判定浮点数是否相等 ，
+    // 应为浮点数不能用二进制精确存储
+    // 数据类型转换：+号的时候将数字转换成字符串，-只能用于数值运算
+    console.log(1+"1","1"-1,"11"+1-1);
+    console.log("wangyao"-1);
+    // NaN: not a number,它与任何变量都不相等，包括它自己
+    console.log(isNaN(NaN));
+    console.log(NaN==NaN,null==null);
+    // isNaN()函数用来判断一个变量是否为NaN
+    // parseInt()是取整向下取整
+    console.log(parseInt(123.79));
+    // 如果想判断一个数值是不是整数的方法有什么？
+    var num = 123;
+    console.log(num==parseInt(num));
+    // parseInt()函数的第二个参数是进制数
+    console.log(parseInt(100,16));
+    // 1-100求和
+     var sum = 0;
+     for(var i=1;i<=100;i++){
+         sum += i;
+     }
+     console.log("1~100求和：",sum);
+    // 数7，（7的倍数，最大到99，个位是7，或者十位是7,不显示数字）
+    const container = document.querySelector('.container');
+    for(var i=1;i<=99;i++){
+        const box = document.createElement('div');
+        if(i%7==0 || i%10==7|| parseInt(i/10)==7){
+            // 满足数7规则，空方块
+            container.appendChild(box);
+        }
+        else{
+            box.innerText = i;
+            container.appendChild(box);
+        }
+    }
+    // 课后练习：回文数显示11,22，33，44，55，66，77，88，99，范围1-99
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1d6049">
+    <meta name="description" content="移动端底部导航 · SVG 版：symbol + use 复用图标、固定定位、flex 自适应等宽、数字徽章与红点。">
+    <title>底部导航 · SVG 版 — 王垚高级网页设计</title>
+    <script src="font/iconfont.js"></script>
+    <style>
+        :root {
+            --wy_ink: #23282e;
+            --wy_sub: #7a7e87;
+            --wy_line: #e7e8ec;
+            --wy_bg: #f6f5f1;
+            --wy_card: #ffffff;
+            --wy_green: #1d6049;
+            --wy_green_dark: #123d30;
+            --wy_lime: #c5df79;
+            --wy_red: #f43f3b;
+            --wy_nav_h: 58px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #e6e4dd;
+            color: var(--wy_ink);
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .wy_page {
+            max-width: 480px;
+            min-height: 100vh;
+            margin: 0 auto;
+            background: var(--wy_bg);
+            box-shadow: 0 0 40px rgba(35, 40, 46, 0.12);
+        }
+
+        /* 顶栏：返回首页 + 标题 + 对照版入口 */
+        .wy_top {
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 13px 16px;
+            background: var(--wy_green_dark);
+            color: #fffdf8;
+        }
+
+        .wy_back {
+            flex: none;
+            padding: 3px 10px 3px 6px;
+            border: 1px solid rgba(197, 223, 121, 0.5);
+            border-radius: 999px;
+            color: var(--wy_lime);
+            font-size: 12.5px;
+        }
+
+        .wy_title {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .wy_alt {
+            flex: none;
+            color: var(--wy_lime);
+            font-size: 12.5px;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(197, 223, 121, 0.5);
+        }
+
+        .wy_content {
+            padding: 16px 16px calc(var(--wy_nav_h) + env(safe-area-inset-bottom, 0px) + 30px);
+        }
+
+        /* 技术说明卡 */
+        .wy_note {
+            padding: 15px 16px;
+            border: 1px solid var(--wy_line);
+            border-left: 4px solid var(--wy_green);
+            border-radius: 12px;
+            background: var(--wy_card);
+        }
+
+        .wy_note h2 {
+            font-size: 14.5px;
+            color: var(--wy_green);
+        }
+
+        .wy_note p {
+            margin-top: 5px;
+            color: var(--wy_sub);
+            font-size: 12.8px;
+        }
+
+        .wy_note code {
+            padding: 1px 5px;
+            border-radius: 4px;
+            background: #f0efe9;
+            color: #58635b;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 11.5px;
+            word-break: break-all;
+        }
+
+        /* 当前选中提示 */
+        .wy_demo_line {
+            margin: 18px 2px 12px;
+            color: var(--wy_sub);
+            font-size: 13px;
+        }
+
+        .wy_demo_line b {
+            color: var(--wy_green);
+            font-size: 15px;
+        }
+
+        /* 演示内容卡片（撑出滚动，体现固定导航） */
+        .wy_card {
+            margin-bottom: 12px;
+            padding: 14px 16px;
+            border: 1px solid var(--wy_line);
+            border-radius: 12px;
+            background: var(--wy_card);
+        }
+
+        .wy_card h3 {
+            font-size: 14px;
+        }
+
+        .wy_card h3 span {
+            margin-left: 8px;
+            color: #b9bdc4;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 11px;
+            font-weight: 400;
+        }
+
+        .wy_card p {
+            margin-top: 4px;
+            color: var(--wy_sub);
+            font-size: 12.5px;
+        }
+
+        /* ===== 固定底部导航：fixed + flex 等分（自适应宽度） ===== */
+        .wy_nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            z-index: 10;
+            display: flex;
+            width: 100%;
+            max-width: 480px;
+            transform: translateX(-50%);
+            border-top: 1px solid var(--wy_line);
+            background: var(--wy_card);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            box-shadow: 0 -6px 18px rgba(35, 40, 46, 0.06);
+        }
+
+        .wy_tab {
+            position: relative;
+            flex: 1;
+            /* 四项等分，宽度自适应屏幕 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            height: var(--wy_nav_h);
+            color: var(--wy_sub);
+            -webkit-tap-highlight-color: transparent;
+            transition: color 160ms ease;
+        }
+
+        .wy_tab_icon {
+            position: relative;
+            display: grid;
+            place-items: center;
+        }
+
+        .wy_svg {
+            width: 23px;
+            height: 23px;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
+        .wy_tab_label {
+            font-size: 11px;
+        }
+
+        .wy_tab.wy_active {
+            color: var(--wy_green);
+            font-weight: 700;
+        }
+
+        /* 徽章：定位在图标右上角 */
+        .wy_badge {
+            position: absolute;
+            top: -9px;
+            right: -13px;
+            min-width: 17px;
+            height: 17px;
+            padding: 0 4px;
+            border: 2px solid var(--wy_card);
+            border-radius: 9px;
+            background: var(--wy_red);
+            color: #fff;
+            font-size: 10.5px;
+            font-weight: 700;
+            line-height: 13px;
+            text-align: center;
+        }
+
+        .wy_dot {
+            position: absolute;
+            top: -4px;
+            right: -9px;
+            width: 9px;
+            height: 9px;
+            border: 1.5px solid var(--wy_card);
+            border-radius: 50%;
+            background: var(--wy_red);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wy_page">
+        <header class="wy_top">
+            <a class="wy_back" href="index.html">‹ 返回首页</a>
+            <h1 class="wy_title">底部导航 · SVG</h1>
+            <a class="wy_alt" href="iconfont-3.html">字体图标版</a>
+        </header>
+
+        <main class="wy_content">
+            <section class="wy_note">
+                <h2>SVG 图标怎么做导航</h2>
+                <p>引入 <code>font/iconfont.js</code>，脚本会把 <code>&lt;symbol&gt;</code> 注入页面，再用 <code>&lt;svg&gt;&lt;use xlink:href="#icon-gouwuche"&gt;&lt;/use&gt;&lt;/svg&gt;</code> 引用。部分图标自带固定填色，脚本会先移除其 fill 属性，让图标跟随 <code>currentColor</code> 变色。</p>
+            </section>
+
+            <p class="wy_demo_line">当前选中：<b>首页</b>，点击下方任意导航项可切换；带徽章的项点击后视为已读，徽章消失。</p>
+
+            <article class="wy_card">
+                <h3>一次注入<span>symbol</span></h3>
+                <p>iconfont.js 只注入一次图标库，页面上多处引用零重复代码。</p>
+            </article>
+            <article class="wy_card">
+                <h3>矢量缩放<span>vector</span></h3>
+                <p>SVG 是坐标描述，任意缩放都清晰，还能做描边动画。</p>
+            </article>
+            <article class="wy_card">
+                <h3>两种徽章<span>badge / dot</span></h3>
+                <p>购物车是数字徽章，首页是小红点，都绝对定位在图标右上角。</p>
+            </article>
+            <article class="wy_card">
+                <h3>安全区<span>safe-area</span></h3>
+                <p>底部加 env(safe-area-inset-bottom)，适配全面屏手势条。</p>
+            </article>
+        </main>
+
+        <nav class="wy_nav" aria-label="底部导航">
+            <a class="wy_tab wy_active" href="#">
+                <span class="wy_tab_icon">
+                    <svg class="wy_svg" aria-hidden="true">
+                        <use xlink:href="#icon-a-shouyechangguishouye-copy"></use>
+                    </svg>
+                    <span class="wy_dot" aria-label="有新消息"></span>
+                </span>
+                <span class="wy_tab_label">首页</span>
+            </a>
+            <a class="wy_tab" href="#">
+                <span class="wy_tab_icon">
+                    <svg class="wy_svg" aria-hidden="true">
+                        <use xlink:href="#icon-faxian"></use>
+                    </svg>
+                </span>
+                <span class="wy_tab_label">发现</span>
+            </a>
+            <a class="wy_tab" href="#">
+                <span class="wy_tab_icon">
+                    <svg class="wy_svg" aria-hidden="true">
+                        <use xlink:href="#icon-gouwuche"></use>
+                    </svg>
+                    <span class="wy_badge">6</span>
+                </span>
+                <span class="wy_tab_label">购物车</span>
+            </a>
+            <a class="wy_tab" href="#">
+                <span class="wy_tab_icon">
+                    <svg class="wy_svg" aria-hidden="true">
+                        <use xlink:href="#icon-wode"></use>
+                    </svg>
+                </span>
+                <span class="wy_tab_label">我的</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            /* iconfont.js 在 DOMContentLoaded 时注入 symbol，其监听器注册在先，故此处注入已完成 */
+            var wy_used = ['icon-a-shouyechangguishouye-copy', 'icon-faxian', 'icon-gouwuche', 'icon-wode'];
+            wy_used.forEach(function (wy_id) {
+                var wy_symbol = document.getElementById(wy_id);
+                if (wy_symbol) {
+                    wy_symbol.querySelectorAll('[fill]').forEach(function (wy_el) {
+                        wy_el.removeAttribute('fill');
+                    });
+                }
+            });
+
+            var wy_tabs = document.querySelectorAll('.wy_tab');
+            var wy_demo_name = document.querySelector('.wy_demo_line b');
+
+            wy_tabs.forEach(function (wy_tab) {
+                wy_tab.addEventListener('click', function (wy_e) {
+                    wy_e.preventDefault();
+                    var wy_current = document.querySelector('.wy_tab.wy_active');
+                    if (wy_current) { wy_current.classList.remove('wy_active'); }
+                    wy_tab.classList.add('wy_active');
+
+                    var wy_badge = wy_tab.querySelector('.wy_badge, .wy_dot');
+                    if (wy_badge) { wy_badge.remove(); }
+
+                    if (wy_demo_name) {
+                        wy_demo_name.textContent = wy_tab.querySelector('.wy_tab_label').textContent;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>案例2-底部Tab导航</title>
-    <script src="https://at.alicdn.com/t/c/font_5231396_qx5l7npzhym.js"></script>
+    <script src="https://at.alicdn.com/t/c/font_5238851_q0mp1u7tfvq.js"></script>
     <style>
         .icon {
             width: 1em;
@@ -38,7 +38,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #666;
+            fill:#666;
+            color:#666;
         }
         .tab-item svg {
             font-size: 24px;
@@ -46,7 +47,8 @@
         }
         /* 激活样式：选中之后变色 */
         .tab-item.active {
-            color: #ff7d00;
+            fill:#ff7d00;
+            color:#ff7d00;
         }
     </style>
 </head>
@@ -58,28 +60,28 @@
     <div class="tab-nav">
         <div class="tab-item active" onclick="changeTab(this)">
             <svg class="icon icon-home" aria-hidden="true">
-                <use xlink:href="#icon-a-shouyechangguishouye-copy"></use>
+                <use xlink:href="#icon-dingwei"></use>
             </svg>
-            <span>首页</span>
+            <span>定位</span>
         </div>
        
         <div class="tab-item" onclick="changeTab(this)">
             <svg class="icon icon-cart" aria-hidden="true">
-                <use xlink:href="#icon-gouwuche"></use>
+                <use xlink:href="#icon-jihua"></use>
             </svg>
-            <span>购物车</span>
+            <span>计划</span>
         </div>
          <div class="tab-item" onclick="changeTab(this)">
             <svg  class="icon icon-dizhi" aria-hidden="true">
-                <use xlink:href="#icon-dizhi"></use>
+                <use xlink:href="#icon-faxian"></use>
             </svg>
-            <span>地址</span>
+            <span>发现</span>
         </div>
         <div class="tab-item" onclick="changeTab(this)">
             <svg class="icon icon-user" aria-hidden="true">
-                <use xlink:href="#icon-wode"></use>
+                <use xlink:href="#icon-user"></use>
             </svg>
-            <span>我的</span>
+            <span>user</span>
         </div>
     </div>
     <!-- 极简JS：只做切换class，难度极低，适合初学 -->

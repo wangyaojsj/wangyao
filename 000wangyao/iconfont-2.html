@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="线描图册：Lucide SVG 图标课堂展示，线条可度量，悬停可见描边绘制过程。">
+    <title>线描图册 · Lucide SVG 图标 — 王垚高级网页设计</title>
+    <script src="cdn/js/lucide.min.js" defer></script>
+    <style>
+        :root {
+            --wy_blue: #0e3053;
+            --wy_deep: #0c2a4a;
+            --wy_line: #dce9f5;
+            --wy_dim: #9fb8cc;
+            --wy_rule: rgba(220, 233, 245, 0.35);
+            --wy_grid: rgba(220, 233, 245, 0.055);
+            --wy_mark: #ff7a5c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            position: relative;
+            background: var(--wy_blue);
+            color: var(--wy_line);
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            line-height: 1.75;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--wy_grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--wy_grid) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .wy_shell {
+            position: relative;
+            width: min(1180px, calc(100% - 44px));
+            margin: 0 auto;
+        }
+
+        .wy_titleblock {
+            display: grid;
+            grid-template-columns: 1.1fr 2fr 1.05fr 0.7fr 1.05fr 0.95fr;
+            margin-top: 26px;
+            border: 1px solid var(--wy_rule);
+            background: rgba(9, 36, 61, 0.6);
+        }
+
+        .wy_tb_cell {
+            display: grid;
+            align-content: center;
+            gap: 2px;
+            padding: 12px 16px;
+            border-left: 1px solid var(--wy_rule);
+        }
+
+        .wy_tb_cell:first-child {
+            border-left: 0;
+        }
+
+        .wy_tb_cell span {
+            color: var(--wy_dim);
+            font-size: 11px;
+            letter-spacing: 0.18em;
+        }
+
+        .wy_tb_cell b {
+            font-size: 13.5px;
+            font-weight: 700;
+        }
+
+        .wy_tb_num {
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        a.wy_tb_cell {
+            transition: color 160ms ease, background 160ms ease;
+        }
+
+        a.wy_tb_cell:hover {
+            color: #ffffff;
+            background: rgba(220, 233, 245, 0.08);
+        }
+
+        .wy_hero {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            align-items: center;
+            gap: 20px 56px;
+            padding: 84px 0 70px;
+        }
+
+        .wy_hero_icon svg {
+            width: 232px;
+            height: 232px;
+            stroke-width: 1.25;
+            color: var(--wy_line);
+        }
+
+        .wy_hero h1 {
+            font-size: clamp(40px, 6vw, 74px);
+            font-weight: 900;
+            line-height: 1.16;
+        }
+
+        .wy_hero_copy {
+            max-width: 620px;
+            margin-top: 22px;
+            color: var(--wy_dim);
+            font-size: 15.5px;
+        }
+
+        .wy_hero_copy b {
+            color: var(--wy_line);
+        }
+
+        .wy_hero_link {
+            margin-top: 18px;
+            color: var(--wy_dim);
+            font-size: 13.5px;
+        }
+
+        .wy_hero_link a {
+            color: var(--wy_line);
+            font-weight: 700;
+            border-bottom: 1px solid var(--wy_rule);
+        }
+
+        .wy_hero_link a:hover {
+            border-color: var(--wy_line);
+        }
+
+        .wy_case {
+            margin-top: 64px;
+        }
+
+        .wy_case_head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .wy_case_head h2 {
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .wy_case_head p {
+            color: var(--wy_dim);
+            font-size: 13px;
+            text-align: right;
+        }
+
+        .wy_case_head p em {
+            font-style: normal;
+            color: var(--wy_mark);
+        }
+
+        .wy_stroke_row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .wy_stroke {
+            position: relative;
+            display: grid;
+            justify-items: center;
+            gap: 16px;
+            padding: 40px 18px 24px;
+            border: 1px solid var(--wy_rule);
+            background: rgba(9, 36, 61, 0.45);
+        }
+
+        .wy_stroke::before {
+            content: "";
+            position: absolute;
+            top: 13px;
+            left: 12px;
+            right: 12px;
+            height: 9px;
+            background:
+                linear-gradient(var(--wy_dim), var(--wy_dim)) left top / 1px 9px no-repeat,
+                linear-gradient(var(--wy_dim), var(--wy_dim)) right top / 1px 9px no-repeat,
+                linear-gradient(var(--wy_dim), var(--wy_dim)) left top / 100% 1px no-repeat;
+        }
+
+        .wy_stroke svg {
+            width: 96px;
+            height: 96px;
+            color: var(--wy_line);
+        }
+
+        .wy_stroke figcaption {
+            display: grid;
+            justify-items: center;
+            gap: 2px;
+            color: var(--wy_dim);
+            font-size: 12.5px;
+            text-align: center;
+        }
+
+        .wy_stroke figcaption code {
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 12px;
+            color: var(--wy_line);
+        }
+
+        .wy_sw15 svg {
+            stroke-width: 1.5;
+        }
+
+        .wy_sw20 svg {
+            stroke-width: 2;
+        }
+
+        .wy_sw25 svg {
+            stroke-width: 2.5;
+        }
+
+        .wy_tray {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+            gap: 1px;
+            border: 1px solid var(--wy_rule);
+            background: var(--wy_rule);
+            list-style: none;
+        }
+
+        .wy_cell {
+            display: grid;
+            justify-items: center;
+            gap: 9px;
+            padding: 30px 12px 22px;
+            background: var(--wy_deep);
+            transition: background 180ms ease;
+        }
+
+        .wy_cell:hover {
+            background: #10385f;
+        }
+
+        .wy_cell svg {
+            width: 34px;
+            height: 34px;
+            color: var(--wy_line);
+        }
+
+        .wy_cell_name {
+            color: var(--wy_dim);
+            font-size: 12.5px;
+        }
+
+        .wy_footerblock {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 80px;
+            border: 1px solid var(--wy_rule);
+            background: rgba(9, 36, 61, 0.6);
+            padding: 16px 20px;
+            margin-bottom: 34px;
+            color: var(--wy_dim);
+            font-size: 13px;
+        }
+
+        .wy_footerblock span {
+            margin-right: 10px;
+            font-size: 11px;
+            letter-spacing: 0.18em;
+        }
+
+        .wy_footerblock b {
+            font-weight: 700;
+        }
+
+        .wy_footer_links {
+            display: flex;
+            gap: 26px;
+        }
+
+        .wy_footer_links a {
+            color: var(--wy_line);
+            font-weight: 700;
+        }
+
+        .wy_footer_links a:hover {
+            color: #ffffff;
+        }
+
+        .wy_draw svg * {
+            transition: stroke-dashoffset 900ms ease;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .wy_draw svg * {
+                transition: none;
+                stroke-dasharray: none !important;
+                stroke-dashoffset: 0 !important;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .wy_titleblock {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .wy_tb_cell {
+                border-top: 1px solid var(--wy_rule);
+            }
+
+            .wy_tb_cell:nth-child(-n+2) {
+                border-top: 0;
+            }
+
+            .wy_tb_cell:nth-child(odd) {
+                border-left: 0;
+            }
+
+            .wy_tb_brand,
+            .wy_tb_back {
+                grid-column: span 2;
+                border-left: 0;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .wy_shell {
+                width: calc(100% - 30px);
+            }
+
+            .wy_hero {
+                grid-template-columns: 1fr;
+                padding: 56px 0 44px;
+            }
+
+            .wy_hero_icon svg {
+                width: 150px;
+                height: 150px;
+            }
+
+            .wy_case_head {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .wy_case_head p {
+                text-align: left;
+            }
+
+            .wy_stroke_row {
+                grid-template-columns: 1fr;
+            }
+
+            .wy_tray {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wy_shell">
+        <header class="wy_titleblock">
+            <a class="wy_tb_cell" href="index.html">
+                <span>制图</span><b>王垚 · 制图室</b>
+            </a>
+            <div class="wy_tb_cell"><span>图名</span><b>Lucide SVG 图标 · 线描图册</b></div>
+            <div class="wy_tb_cell"><span>图号</span><b class="wy_tb_num">WY-005-02</b></div>
+            <div class="wy_tb_cell"><span>比例</span><b class="wy_tb_num">1 : 1</b></div>
+            <div class="wy_tb_cell"><span>日期</span><b class="wy_tb_num">2026-10-23</b></div>
+            <a class="wy_tb_cell" href="index.html"><span>出图</span><b>返回首页</b></a>
+        </header>
+
+        <main>
+            <section class="wy_hero">
+                <div class="wy_hero_icon wy_draw" aria-hidden="true">
+                    <i data-lucide="compass"></i>
+                </div>
+                <div>
+                    <h1>线条，<br>是可以度量的。</h1>
+                    <p class="wy_hero_copy">SVG 用坐标与路径描述形状：笔画的粗细、颜色、尺寸都能精确控制，放大任意倍数依然锐利。这是一册 Lucide 线描图——悬停任意图形，可以看到线条被<b>逐笔画出</b>的过程。</p>
+                    <p class="wy_hero_link">对照阅读 <a href="iconfont-1.html">活字样张 · 字体图标版</a></p>
+                </div>
+            </section>
+
+            <section class="wy_case" aria-labelledby="wy_case_0">
+                <header class="wy_case_head">
+                    <h2 id="wy_case_0">描边，可以度量</h2>
+                    <p>同一枚羽毛，三种笔画粗细——<em>这是字体图标做不到的事</em></p>
+                </header>
+                <div class="wy_stroke_row">
+                    <figure class="wy_stroke wy_draw wy_sw15">
+                        <i data-lucide="feather"></i>
+                        <figcaption><code>stroke-width: 1.5</code><span>细如笔芯</span></figcaption>
+                    </figure>
+                    <figure class="wy_stroke wy_draw wy_sw20">
+                        <i data-lucide="feather"></i>
+                        <figcaption><code>stroke-width: 2</code><span>标准笔画</span></figcaption>
+                    </figure>
+                    <figure class="wy_stroke wy_draw wy_sw25">
+                        <i data-lucide="feather"></i>
+                        <figcaption><code>stroke-width: 2.5</code><span>浓墨一笔</span></figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="wy_case" aria-labelledby="wy_case_1">
+                <header class="wy_case_head">
+                    <h2 id="wy_case_1">界面件</h2>
+                    <p>日常操作里最常见的图形，写法 data-lucide="名称"</p>
+                </header>
+                <ul class="wy_tray">
+                    <li class="wy_cell wy_draw"><i data-lucide="home"></i><span class="wy_cell_name">home 首页入口</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="search"></i><span class="wy_cell_name">search 搜索框</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="settings"></i><span class="wy_cell_name">settings 设置页</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="bell"></i><span class="wy_cell_name">bell 通知提醒</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="bookmark"></i><span class="wy_cell_name">bookmark 收藏夹</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="trash-2"></i><span class="wy_cell_name">trash-2 删除操作</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="pencil"></i><span class="wy_cell_name">pencil 编辑状态</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="eye"></i><span class="wy_cell_name">eye 可见性</span></li>
+                </ul>
+            </section>
+
+            <section class="wy_case" aria-labelledby="wy_case_2">
+                <header class="wy_case_head">
+                    <h2 id="wy_case_2">媒体件</h2>
+                    <p>声音与影像的线描表达</p>
+                </header>
+                <ul class="wy_tray">
+                    <li class="wy_cell wy_draw"><i data-lucide="camera"></i><span class="wy_cell_name">camera 拍照</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="music"></i><span class="wy_cell_name">music 音频播放</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="video"></i><span class="wy_cell_name">video 视频播放</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="image"></i><span class="wy_cell_name">image 图片占位</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="mic"></i><span class="wy_cell_name">mic 录音</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="headphones"></i><span class="wy_cell_name">headphones 耳机输出</span></li>
+                </ul>
+            </section>
+
+            <section class="wy_case" aria-labelledby="wy_case_3">
+                <header class="wy_case_head">
+                    <h2 id="wy_case_3">天气件</h2>
+                    <p>同一套线条，画出阴晴风雨</p>
+                </header>
+                <ul class="wy_tray">
+                    <li class="wy_cell wy_draw"><i data-lucide="sun"></i><span class="wy_cell_name">sun 白天</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="moon"></i><span class="wy_cell_name">moon 夜间</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="cloud"></i><span class="wy_cell_name">cloud 天气</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="zap"></i><span class="wy_cell_name">zap 闪电能量</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="umbrella"></i><span class="wy_cell_name">umbrella 防雨</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="wind"></i><span class="wy_cell_name">wind 风力</span></li>
+                </ul>
+            </section>
+
+            <section class="wy_case" aria-labelledby="wy_case_4">
+                <header class="wy_case_head">
+                    <h2 id="wy_case_4">操作件</h2>
+                    <p>增删改查，方向与流转</p>
+                </header>
+                <ul class="wy_tray">
+                    <li class="wy_cell wy_draw"><i data-lucide="download"></i><span class="wy_cell_name">download 下载</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="upload"></i><span class="wy_cell_name">upload 上传</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="plus"></i><span class="wy_cell_name">plus 新增</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="check"></i><span class="wy_cell_name">check 确认</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="x"></i><span class="wy_cell_name">x 关闭</span></li>
+                    <li class="wy_cell wy_draw"><i data-lucide="rotate-cw"></i><span class="wy_cell_name">rotate-cw 刷新</span></li>
+                </ul>
+            </section>
+        </main>
+
+        <footer class="wy_footerblock">
+            <div><span>制图</span><b>王垚</b></div>
+            <div><span>课程</span><b>《高级网页设计》课堂实践 · 2026</b></div>
+            <nav class="wy_footer_links">
+                <a href="index.html">返回首页</a>
+                <a href="iconfont-1.html">活字样张版</a>
+            </nav>
+        </footer>
+    </div>
+
+    <script>
+        window.addEventListener('load', function () {
+            if (typeof lucide === 'undefined') { return; }
+            lucide.createIcons();
+
+            var wy_reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var wy_geometry = 'path,line,circle,rect,polyline,polygon,ellipse';
+
+            function wy_setHidden(wy_el) {
+                var wy_len = Math.ceil(wy_el.getTotalLength()) + 2;
+                wy_el.style.strokeDasharray = wy_len + ' ' + wy_len;
+                wy_el.style.strokeDashoffset = wy_len;
+                return wy_len;
+            }
+
+            function wy_showAll(wy_root) {
+                wy_root.querySelectorAll(wy_geometry).forEach(function (wy_el) {
+                    wy_el.style.strokeDashoffset = '0';
+                });
+            }
+
+            if (!wy_reduced) {
+                var wy_hero = document.querySelector('.wy_hero_icon');
+                if (wy_hero) {
+                    wy_hero.querySelectorAll(wy_geometry).forEach(wy_setHidden);
+                    setTimeout(function () { wy_showAll(wy_hero); }, 300);
+                }
+
+                var wy_strokes = document.querySelectorAll('.wy_stroke');
+                wy_strokes.forEach(function (wy_fig, wy_i) {
+                    wy_fig.querySelectorAll(wy_geometry).forEach(wy_setHidden);
+                    setTimeout(function () { wy_showAll(wy_fig); }, 800 + wy_i * 180);
+                });
+
+                document.querySelectorAll('.wy_tray .wy_cell').forEach(function (wy_cell) {
+                    wy_cell.addEventListener('mouseenter', function () {
+                        var wy_els = wy_cell.querySelectorAll(wy_geometry);
+                        wy_els.forEach(function (wy_el) {
+                            wy_el.style.transition = 'none';
+                            wy_el.style.strokeDashoffset = wy_setHidden(wy_el);
+                        });
+                        void wy_cell.offsetWidth;
+                        wy_els.forEach(function (wy_el) {
+                            wy_el.style.transition = '';
+                            wy_el.style.strokeDashoffset = '0';
+                        });
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>抓小球小游戏｜三种函数形式</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{
+            height:100vh;
+            background:#f0f8ff;
+            overflow:hidden;
+            font-size:24px;
+        }
+        #info{
+            padding:16px;
+            background:#222;
+            color:#fff;
+        }
+        .ball{
+            width:80px;
+            height:80px;
+            border-radius:50%;
+            background:rgb(40,160,255);
+            position:absolute;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">当前分数：<span id="scoreText">0</span></div>
+    <div class="ball" id="ball"></div>
+
+<script>
+    // const约束的是：变量的引用地址不能变，不是对象里面的数据不能改。
+const game = {
+    score: 0,
+    // ballDom是dom对象
+    ballDom: document.getElementById("ball"),
+    width: 80,
+    height: 80
+};
+
+// ======================
+// 【1】普通函数声明 function 命名函数
+// 特点：存在函数提升，拥有自己的this、arguments
+// ======================
+function updateScore(){
+    document.getElementById("scoreText").innerText = game.score;
+}
+
+function moveBall(){
+    // 保证小球再屏幕内maxX = 窗口宽度 - 小球宽度
+    const maxX = window.innerWidth - game.width;
+    const maxY = window.innerHeight - game.height;
+    // 小球随机位置是0-窗口宽度取整
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+    // 设置小球的位置
+    game.ballDom.style.left = randomX + "px";
+    game.ballDom.style.top = randomY + "px";
+}
+// ### 补充小提问（课堂互动）
+// 问：如果不减去小球宽度，直接写 `Math.random() * window.innerWidth` 会怎么样？
+// 答：有可能小球一部分跑到屏幕外面，只能看到半截球！
+// ======================
+// 【2】匿名函数表达式（赋值给变量 / 直接作为回调）
+// 特点：没有函数名，不存在提升，有独立this
+// 这里给小球绑定点击事件，回调用匿名函数
+// ======================
+game.ballDom.addEventListener("click", function(e){
+    // 匿名函数里 this → 当前点击的DOM元素（.ball）
+    console.log("匿名函数中的this：", this);
+    game.score += 10;
+    updateScore();
+    moveBall();
+    // 阻止冒泡，避免触发body的miss扣分
+    e.stopPropagation();
+});
+
+// 空白区域点击扣分
+document.body.addEventListener("click", function(e){
+    console.log("点击的是：", game.score);
+    if(e.target !== game.ballDom){
+        game.score -= 5;
+        updateScore();
+    }
+});
+
+// ======================
+// 【3】箭头函数 ()=>{}
+// 特点：没有自己的this，继承外层this；没有arguments；不能new
+// 监听窗口resize，窗口改变时重新放置小球
+// ======================
+window.addEventListener("resize", () => {
+    console.log("箭头函数中的this：", this); // this指向window，不是触发事件的window对象！
+    moveBall();
+});
+// 页面初始化
+moveBall();
+</script>
+</body>
+</html>
