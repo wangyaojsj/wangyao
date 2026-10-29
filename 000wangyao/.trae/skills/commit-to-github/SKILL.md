@@ -36,4 +36,5 @@ description: 将当前项目 commit 并 push 到 GitHub 仓库 wangyaojsj/wangya
 
 - 认证/连接失败：先 `ssh -T -o BatchMode=yes -p 443 git@ssh.github.com` 验证公钥（GitHub 正常时返回 exit 1 并输出 Hi <用户名>）；报 Connection refused 说明 22 端口被封，必须走 443 形式地址；仍失败则如实报告用户，不要切 HTTPS。
 - 非 fast-forward（远程有新提交）：`git fetch origin` 后向用户报告分歧，由用户决定 rebase 或 merge，不要擅自强推。
+- 推送报 "Could not read from remote repository" 时：先 `git ls-remote github` 核对远端 `refs/heads/master` 是否已等于本地 HEAD——本网络可能在 ref 更新后才断连导致误报，实际已推送成功。
 - 其他错误：原样报告错误输出。
