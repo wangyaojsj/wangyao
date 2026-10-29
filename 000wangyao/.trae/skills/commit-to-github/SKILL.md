@@ -11,8 +11,9 @@ description: 将当前项目 commit 并 push 到 GitHub 仓库 wangyaojsj/wangya
 
 - 本仓库双远程，`git remote -v` 先检查：
   - `origin` = Gitee `https://gitee.com/neusoft_wangyao_jsj/webprojectwangyao.git`（课程仓库，保持不动，用户未明确要求时不推送）
-  - `github` = `git@github.com:wangyaojsj/wangyao.git`（即 https://github.com/wangyaojsj/wangyao ，必须用 SSH 形式走公钥认证）
-- 若无 `github` 远程 → `git remote add github git@github.com:wangyaojsj/wangyao.git`
+  - `github` = `ssh://git@ssh.github.com:443/wangyaojsj/wangyao.git`（即 https://github.com/wangyaojsj/wangyao ，SSH 公钥认证）
+- 本网络封锁 github.com 的 22 端口，必须用上面的 443 端口形式；`git@github.com:...` 会报 Connection refused
+- 若无 `github` 远程 → `git remote add github ssh://git@ssh.github.com:443/wangyaojsj/wangyao.git`
 - 不得修改或删除 `origin`，不得改用 HTTPS + 账号密码/token 方式推送
 
 ## 流程
@@ -33,6 +34,6 @@ description: 将当前项目 commit 并 push 到 GitHub 仓库 wangyaojsj/wangya
 
 ## 失败处理
 
-- 认证失败：运行 `ssh -T git@github.com` 验证公钥；仍失败则如实报告用户，不要切 HTTPS。
+- 认证/连接失败：先 `ssh -T -o BatchMode=yes -p 443 git@ssh.github.com` 验证公钥（GitHub 正常时返回 exit 1 并输出 Hi <用户名>）；报 Connection refused 说明 22 端口被封，必须走 443 形式地址；仍失败则如实报告用户，不要切 HTTPS。
 - 非 fast-forward（远程有新提交）：`git fetch origin` 后向用户报告分歧，由用户决定 rebase 或 merge，不要擅自强推。
 - 其他错误：原样报告错误输出。
